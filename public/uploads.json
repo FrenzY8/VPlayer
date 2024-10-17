@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "Video 1",
+    "url": "https://doodstream.com/abc123",
+    "thumbnail": "https://example.com/thumbnail1.jpg",
+    "views": 0
+  },
+  {
+    "id": "2",
+    "title": "Video 2",
+    "url": "https://doodstream.com/def456",
+    "thumbnail": "https://example.com/thumbnail2.jpg",
+    "views": 0
+  }
+]

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Player</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #2c2c2c; color: #fff; }
+    .container { width: 80%; margin: 0 auto; }
+    .search { margin-bottom: 20px; }
+    .video-list { display: flex; flex-wrap: wrap; gap: 20px; }
+    .video-item { width: 300px; border: 1px solid #444; border-radius: 10px; padding: 10px; background-color: #333; }
+    .video-item img { width: 100%; height: auto; border-radius: 10px; }
+    .video-item h3 { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Video Player</h1>
+    <div class="search">
+      <form action="search.html" method="GET">
+        <input type="text" name="query" placeholder="Search videos..." required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div class="video-list" id="video-list"></div>
+  </div>
+
+  <script>
+    let videos = [];
+
+    function fetchVideos() {
+      fetch('uploads.json')
+        .then(response => response.json())
+        .then(data => {
+          videos = data;
+          displayVideos(videos);
+        });
+    }
+
+    function displayVideos(videosToDisplay) {
+      const videoList = document.getElementById('video-list');
+      videoList.innerHTML = '';
+      videosToDisplay.forEach(video => {
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+        videoItem.innerHTML = `
+          <img src="${video.thumbnail}" alt="Thumbnail">
+          <h3>${video.title}</h3>
+          <a href="watch.html?id=${video.id}">Watch Video</a>
+        `;
+        videoList.appendChild(videoItem);
+      });
+    }
+
+    fetchVideos();
+  </script>
+</body>
+</html>
